@@ -1,7 +1,7 @@
 {
-  "name": "node-typescript-boilerplate",
+  "name": "hoarder",
   "version": "0.0.0",
-  "description": "Minimalistic boilerplate to quick-start Node.js development in TypeScript.",
+  "description": "Plugin Driven PVR Built in Node.js",
   "engineStrict": true,
   "engines": {
     "node": ">= 6.2.0"
