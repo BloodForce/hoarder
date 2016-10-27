@@ -9,17 +9,21 @@
   "devDependencies": {
     "@types/jest": "^15.1.32",
     "@types/node": "^6.0.45",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-tslint": "^6.1.2",
+    "gulp-typescript": "^3.0.2",
     "jest": "^16.0.2",
     "rimraf": "^2.5.4",
-    "tslint": "^3.15.1",
-    "tslint-microsoft-contrib": "^2.0.11",
-    "typescript": "^2.0.3"
+    "typescript": "^2.0.6"
   },
   "scripts": {
     "clean": "rimraf coverage build tmp",
     "build": "tsc -p tsconfig.release.json",
     "watch": "tsc -w -p tsconfig.release.json",
     "lint": "tslint -t stylish '{src,test}/**/*.{ts}'",
+    "start": "npm run watch; node build/src/main",
     "test": "jest --coverage",
     "test:watch": "jest --watch"
   },

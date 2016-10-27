@@ -4,9 +4,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": false,
-    "allowSyntheticDefaultImports": true,
-    "jsx": "preserve",
-    "allowJs": true
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "src/**/*",

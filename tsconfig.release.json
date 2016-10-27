@@ -9,9 +9,7 @@
     "rootDir": ".",
     "outDir": "build",
     "allowSyntheticDefaultImports": true,
-    "removeComments": true,
-    "jsx": "react",
-    "allowJs": true
+    "removeComments": true
   },
   "include": [
     "src/**/*"
