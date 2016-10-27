@@ -1,9 +1,4 @@
-function greeter(name: string): string {
-	return `Hello, ${name}`;
-}
+import {Conductor} from './conductors';
 
-console.log(greeter('Shep'));
-
-export {
-	greeter,
-};
+const conductor = new Conductor();
+conductor.pollRss().then((data) => console.log(data));

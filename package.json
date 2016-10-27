@@ -6,58 +6,32 @@
   "engines": {
     "node": ">= 6.2.0"
   },
+  "dependencies": {},
   "devDependencies": {
-    "@types/jest": "^15.1.32",
-    "@types/node": "^6.0.45",
-    "del": "^2.2.2",
-    "gulp": "^3.9.1",
-    "gulp-nodemon": "^2.2.1",
-    "gulp-tslint": "^6.1.2",
-    "gulp-typescript": "^3.0.2",
-    "jest": "^16.0.2",
-    "rimraf": "^2.5.4",
-    "typescript": "^2.0.6"
+    "@types/node": "6.0.45",
+    "@types/sequelize": "4.0.38",
+    "del": "2.2.2",
+    "gulp": "3.9.1",
+    "gulp-nodemon": "2.2.1",
+    "gulp-typescript": "3.0.2",
+    "rimraf": "2.5.4",
+    "typescript": "2.0.6"
   },
   "scripts": {
     "clean": "rimraf coverage build tmp",
     "build": "tsc -p tsconfig.release.json",
     "watch": "tsc -w -p tsconfig.release.json",
     "lint": "tslint -t stylish '{src,test}/**/*.{ts}'",
-    "start": "npm run watch; node build/src/main",
-    "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "start": "npm run watch; node build/src/main"
   },
-  "author": "Jakub Synowiec <jakub@jakubsynowiec.info> (https://jakubsynowiec.info)",
+  "author": "Chris Shepherd <chris.shepherd@email.com> (https://github.com/Shepless/hoarder)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jsynowiec/node-typescript-boilerplate.git"
+    "url": "https://github.com/Shepless/hoarder.git"
   },
   "bugs": {
-    "url": "https://github.com/jsynowiec/node-typescript-boilerplate/issues"
+    "url": "https://github.com/Shepless/hoarder/issues"
   },
-  "homepage": "https://github.com/jsynowiec/node-typescript-boilerplate#readme",
-  "jest": {
-    "testEnvironment": "node",
-    "scriptPreprocessor": "<rootDir>/preprocessor.js",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx"
-    ],
-    "testRegex": "<rootDir>(test/).*\\.(test|spec)\\.(ts|js)$",
-    "coverageDirectory": "coverage",
-    "collectCoverageFrom": [
-      "src/**/*.{ts,tsx,js,jsx}"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 60,
-        "functions": 60,
-        "lines": 60,
-        "statements": 60
-      }
-    }
-  }
+  "homepage": "https://github.com/Shepless/hoarder#readme"
 }

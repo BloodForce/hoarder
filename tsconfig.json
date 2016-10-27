@@ -3,8 +3,11 @@
     "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
+    "lib": ["es6"],
     "noImplicitAny": false,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": [
     "src/**/*",
