@@ -7,4 +7,8 @@ export class PluginFactory {
 
 		return new Plugin(info.name, PLUGIN_CONFIG);
 	}
+
+	static createPlugins(type: string, configurations: Array<any>) {
+		return configurations.map((configuration) => this.createPlugin(type, configuration));
+	}
 }
