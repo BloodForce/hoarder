@@ -1,3 +1,10 @@
+const path = require('path');
+
 export class PluginFactory {
-	static createPlugin() {}
+	static createPlugin(type: string, info: any) {
+		let Plugin = require(path.resolve(__dirname, '..', 'plugins', type, info.name)).HdTorrents,
+			PLUGIN_CONFIG = require(path.resolve(__dirname, '..', 'plugins', type, info.name, 'config'));
+
+		return new Plugin(info.name, PLUGIN_CONFIG);
+	}
 }

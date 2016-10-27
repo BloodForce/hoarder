@@ -1,4 +1,10 @@
-import {Conductor} from './conductors';
+import {SeedBox} from './library';
 
-const conductor = new Conductor();
-conductor.pollRss().then((data) => console.log(data));
+new SeedBox({
+	name: 'Seedboxes.cc',
+	hddSize: 200,
+	providers: [{
+		name: 'hd-torrents',
+		config: {}
+	}]
+});

@@ -6,8 +6,11 @@
   "engines": {
     "node": ">= 6.2.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "later": "^1.2.0"
+  },
   "devDependencies": {
+    "@types/later": "0.0.28",
     "@types/node": "6.0.45",
     "@types/sequelize": "4.0.38",
     "del": "2.2.2",
