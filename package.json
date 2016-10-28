@@ -7,12 +7,15 @@
     "node": ">= 6.2.0"
   },
   "dependencies": {
-    "later": "^1.2.0"
+    "later": "1.2.0",
+    "sqlite3": "3.1.8",
+    "typeorm": "0.0.2-alpha.69"
   },
   "devDependencies": {
     "@types/later": "0.0.28",
     "@types/node": "6.0.45",
     "@types/sequelize": "4.0.38",
+    "@types/sqlite3": "^2.2.31",
     "del": "2.2.2",
     "gulp": "3.9.1",
     "gulp-nodemon": "2.2.1",
