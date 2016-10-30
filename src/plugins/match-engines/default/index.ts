@@ -1,8 +1,12 @@
-import { Service } from "typedi";
+import { PLUGIN_TYPE } from '../../../library/orm';
 import { IMatchEnginePlugin } from './../../../library/plugin/index';
+import { injectable } from 'inversify';
 
-@Service('foo')
+@injectable()
 export class DefaultMatchEngine implements IMatchEnginePlugin {
+	public static TYPE = PLUGIN_TYPE.MATCH_ENGINE;
+	public static NAME = 'Default Match Engine';
+
 	init(config: any) {
 		console.log(config)
 	}

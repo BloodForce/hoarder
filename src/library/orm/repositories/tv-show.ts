@@ -30,4 +30,12 @@ export class TvShowRepository implements IRepository<ITvShow> {
     update(entity: ITvShow) {
         return this.repository.persist(entity);
     }
+
+    remove(entity: ITvShow) {
+        return this.repository.remove(entity);
+    }
+
+    queryBuilder() {
+        return this.repository.createQueryBuilder('tv-show');
+    }
 }

@@ -1,6 +1,7 @@
 import { ISeedBox } from '../';
+import { Plugin } from './plugin';
 import { injectable } from 'inversify';
-import { Column, PrimaryGeneratedColumn, Table } from 'typeorm';
+import { Column, OneToMany, PrimaryGeneratedColumn, Table } from 'typeorm';
 
 @Table()
 @injectable()
@@ -13,4 +14,9 @@ export class SeedBox implements ISeedBox {
 
 	@Column()
 	description: string;
+
+	@OneToMany(type => Plugin, plugin => plugin.seedBox, {
+		cascadeAll: true,
+	})
+    plugins: Array<Plugin>;
 }

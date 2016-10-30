@@ -1,6 +1,6 @@
 import { TYPES } from '../../../inversify.types';
 import { IDatabaseProvider, ISeedBox } from '../../orm';
-import { SeedBox } from '../entities/seedbox';
+import { SeedBox } from '../entities/seed-box';
 import { IRepository } from '../index';
 import { inject, injectable } from 'inversify';
 import { FindOptions, Repository } from 'typeorm';
@@ -10,7 +10,7 @@ export class SeedBoxRepository implements IRepository<ISeedBox> {
     private repository: Repository<ISeedBox>;
 
     constructor( @inject(TYPES.DATABASE_PROVIDER) databaseProvider: IDatabaseProvider) {
-        this.repository = databaseProvider.connection.getRepository(SeedBox);
+        this.repository = databaseProvider.connection.getRepository<ISeedBox>(SeedBox);
     }
 
     findOne() {
@@ -29,5 +29,13 @@ export class SeedBoxRepository implements IRepository<ISeedBox> {
 
     update(entity: ISeedBox) {
         return this.repository.persist(entity);
+    }
+
+    remove(entity: ISeedBox) {
+        return this.repository.remove(entity);
+    }
+
+    queryBuilder() {
+        return this.repository.createQueryBuilder('seed-box');
     }
 }
