@@ -1,8 +1,10 @@
-import { injectable } from 'inversify';
 import { ITorrentProviderPlugin } from './../../../library/plugin/index';
 
-@injectable()
 export class HDTorrents implements ITorrentProviderPlugin {
+	constructor() {
+		console.log('HD TORRENTS NEW')
+	}
+
 	init(config: any) {
 		console.log(config)
 	}

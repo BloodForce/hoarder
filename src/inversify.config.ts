@@ -1,58 +1,20 @@
-import { MovieRepository } from './library/orm/repositories/movie';
-import { IMoveRepository } from './library/orm/repositories/index';
-import { useContainer, createConnection, Connection, ConnectionManager } from 'typeorm';
-import { Movie } from './library/orm/entities/movie';
-import { Kernel, interfaces } from 'inversify';
-import { IPlugin, IPluginFactory, IMatchEnginePlugin, ITorrentProviderPlugin } from './library/plugin';
-import { PluginFactory } from './library/plugin/plugin-factory';
-import { ISeedBox } from './library/seed-box';
-import { SeedBox } from './library/seed-box/seed-box';
-import { HDTorrents } from './plugins/torrent-providers/hd-torrents';
-import { DefaultMatchEngine } from './plugins/match-engines/default';
-import { PirateBay } from './plugins/torrent-providers/pirate-bay';
 import { TYPES } from './inversify.types';
+import { IDatabaseProvider, IMovie, IRepository, ISeedBox, ITvShow } from './library/orm';
+import { DatabaseProvider } from './library/orm/database-provider';
+import { MovieRepository } from './library/orm/repositories/movie';
+import { SeedBoxRepository } from './library/orm/repositories/seed-box';
+import { TvShowRepository } from './library/orm/repositories/tv-show';
+import { Kernel } from 'inversify';
+import { autoProvide } from 'inversify-binding-decorators';
+import { ConnectionManager } from 'typeorm';
 
 let kernel = new Kernel();
 
-useContainer(kernel);
-kernel.bind<ISeedBox>(TYPES.SEED_BOX).to(SeedBox);
-kernel.bind<IPlugin>(TYPES.PLUGIN).to(HDTorrents).whenTargetNamed('hd-torrents');
-kernel.bind<IPlugin>(TYPES.PLUGIN).to(PirateBay).whenTargetNamed('pirate-bay');
-kernel.bind<IPlugin>(TYPES.PLUGIN).to(DefaultMatchEngine).whenTargetNamed('default');
-kernel.bind<IPluginFactory>(TYPES.PLUGIN_FACTORY).to(PluginFactory);
-kernel.bind<ConnectionManager>('con-man').to(ConnectionManager);
-kernel.bind<interfaces.Provider<Connection>>(TYPES.ORM_CONNECTION).toProvider<Connection>((context) => {
-    return () => {
-		console.log('CREATING CONNECTION')
-        return createConnection({
-			driver: {
-				type: 'sqlite',
-				storage: 'build/hoarder.sqlite'
-			},
-			entities: [
-				__dirname + '/entities/*.js'
-			],
-			autoSchemaSync: true
-		});
-    };
-});
-kernel.bind<interfaces.Factory<IMatchEnginePlugin>>(TYPES.MATCH_ENGINE_FACTORY).toFactory<IMatchEnginePlugin>((context) => {
-    return (config: any) => {
-        let plugin = context.kernel.getNamed<IMatchEnginePlugin>(TYPES.PLUGIN, config.type);
-
-        plugin.init(config);
-
-        return plugin;
-    };
-});
-kernel.bind<interfaces.Factory<ITorrentProviderPlugin>>(TYPES.TORRENT_PROVIDER_FACTORY).toFactory<ITorrentProviderPlugin>((context) => {
-    return (config: any) => {
-        let plugin = context.kernel.getNamed<ITorrentProviderPlugin>(TYPES.PLUGIN, config.type);
-
-        plugin.init(config);
-
-        return plugin;
-    };
-});
+// ORM Bindings
+autoProvide(kernel, [ConnectionManager]);
+kernel.bind<IDatabaseProvider>(TYPES.DATABASE_PROVIDER).to(DatabaseProvider).inSingletonScope();
+kernel.bind<IRepository<IMovie>>(TYPES.MOVIE_REPOSITORY).to(MovieRepository).inSingletonScope();
+kernel.bind<IRepository<ITvShow>>(TYPES.TV_SHOW_REPOSITORY).to(TvShowRepository).inSingletonScope();
+kernel.bind<IRepository<ISeedBox>>(TYPES.SEED_BOX_REPOSITORY).to(SeedBoxRepository).inSingletonScope();
 
 export { kernel };

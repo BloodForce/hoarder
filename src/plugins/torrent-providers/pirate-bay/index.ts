@@ -1,7 +1,7 @@
-import { injectable } from 'inversify';
+import { Service } from 'typedi';
 import { ITorrentProviderPlugin } from './../../../library/plugin/index';
 
-@injectable()
+@Service('PR')
 export class PirateBay implements ITorrentProviderPlugin {
 	init(config: any) {
 		console.log(config)

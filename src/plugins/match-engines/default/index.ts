@@ -1,7 +1,7 @@
-import { injectable } from "inversify";
+import { Service } from "typedi";
 import { IMatchEnginePlugin } from './../../../library/plugin/index';
 
-@injectable()
+@Service('foo')
 export class DefaultMatchEngine implements IMatchEnginePlugin {
 	init(config: any) {
 		console.log(config)
