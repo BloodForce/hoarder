@@ -10,7 +10,7 @@ export interface IRepository<T> {
 
 export interface IDatabaseProvider {
 	connection: Connection;
-    init(): Promise<Connection>
+    connect(): Promise<Connection>
 }
 
 export interface IMovie {

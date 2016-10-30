@@ -3,10 +3,10 @@ import { kernel } from './inversify.config';
 import { TYPES } from './inversify.types';
 import { IMovie, IDatabaseProvider, IRepository } from './library/orm';
 
-let orm = kernel.get<IDatabaseProvider>(TYPES.DATABASE_PROVIDER);
+let database = kernel.get<IDatabaseProvider>(TYPES.DATABASE_PROVIDER);
 let repo;
 
-orm.init()
+database.connect()
     .then(() => {
         repo = kernel.get<IRepository<IMovie>>(TYPES.MOVIE_REPOSITORY);
     })

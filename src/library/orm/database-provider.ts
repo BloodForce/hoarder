@@ -9,7 +9,7 @@ export class DatabaseProvider implements IDatabaseProvider {
 
 	public connection: Connection;
 
-	async init() {
+	async connect() {
 		this.connection = await createConnection({
 			driver: {
 				type: 'sqlite',
