@@ -1,5 +1,8 @@
-import { SeedBox } from './library/seed-box';
 import 'reflect-metadata';
+import { PirateBay } from './plugins/torrent-providers/pirate-bay';
+import { DefaultMatchEngine } from './plugins/match-engines/default';
+import { HDTorrents } from './plugins/torrent-providers/hd-torrents';
+import { SeedBox } from './library/seed-box';
 import { kernel } from './inversify.config';
 import { TYPES } from './inversify.types';
 import { IDatabaseProvider, IRepository, ISeedBox, PLUGIN_TYPE } from './library/orm';
@@ -16,11 +19,14 @@ let database = kernel.get<IDatabaseProvider>(TYPES.DATABASE_PROVIDER);
 //     name: 'Seedbox.cc',
 //     description: 'Primary Seed Box',
 //     plugins: [{
-//         name: 'HD Torrents',
-//         type: PLUGIN_TYPE.TORRENT_PROVIDER
+//         name: HDTorrents.NAME,
+//         type: HDTorrents.TYPE
 //     }, {
-//         name: 'Default Match Engine',
-//         type: PLUGIN_TYPE.MATCH_ENGINE
+//         name: DefaultMatchEngine.NAME,
+//         type: DefaultMatchEngine.TYPE
+//     }, {
+//         name: PirateBay.NAME,
+//         type: PirateBay.TYPE
 //     }]
 // };
 
@@ -35,6 +41,7 @@ let database = kernel.get<IDatabaseProvider>(TYPES.DATABASE_PROVIDER);
 //         .getResults())
 //     .then((data) => console.log(data))
 //     .catch((e) => console.log(e));
+    
 
 // UNCOMMENT ME AFTER YOU HAVE CREATED A SEEDBOX (ABOVE)
 // let seedBox = kernel.get<SeedBox>(TYPES.SEED_BOX);

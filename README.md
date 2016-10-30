@@ -1,2 +1,2 @@
 ### Hoarder
-TODO: Add meaningful stuff about project here...
+Look in main.ts for instrucions (to demo the approach being taken)

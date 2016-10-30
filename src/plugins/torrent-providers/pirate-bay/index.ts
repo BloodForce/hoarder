@@ -5,7 +5,7 @@ import { ITorrentProviderPlugin } from './../../../library/plugin/index';
 @injectable()
 export class PirateBay implements ITorrentProviderPlugin {
 	public static TYPE = PLUGIN_TYPE.TORRENT_PROVIDER;
-	public static NAME = 'pirate-bay';
+	public static NAME = 'Pirate Bay';
 
 	init(config: any) {
 		console.log(config)
