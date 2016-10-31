@@ -1,10 +1,9 @@
 import { TYPES } from './inversify.types';
-import { Orm, Plugins } from './library';
+import { Orm, Plugins, Seedboxes } from './library';
 import { DatabaseProvider } from './library/orm/database-provider';
 import { MovieRepository } from './library/orm/repositories/movie';
 import { SeedBoxRepository } from './library/orm/repositories/seed-box';
 import { TvShowRepository } from './library/orm/repositories/tv-show';
-import { SeedBox } from './library/seed-box/';
 import { DefaultMatchEngine } from './plugins/match-engines/default';
 import { HDTorrents } from './plugins/torrent-providers/hd-torrents';
 import { PirateBay } from './plugins/torrent-providers/pirate-bay';
@@ -26,7 +25,7 @@ kernel.bind<Orm.IRepository<Orm.ITvShowEntity>>(TYPES.TV_SHOW_REPOSITORY).to(TvS
 kernel.bind<Orm.IRepository<Orm.ISeedBoxEntity>>(TYPES.SEED_BOX_REPOSITORY).to(SeedBoxRepository).inSingletonScope();
 
 // SeedBox/Plugin Bindings
-kernel.bind(TYPES.SEED_BOX).to(SeedBox);
+kernel.bind(TYPES.SEED_BOX).to(Seedboxes.SeedBox);
 kernel.bind<Plugins.IPlugin>(TYPES.PLUGIN).to(HDTorrents).whenTargetNamed(HDTorrents.NAME);
 kernel.bind<Plugins.IPlugin>(TYPES.PLUGIN).to(PirateBay).whenTargetNamed(PirateBay.NAME);
 kernel.bind<Plugins.IPlugin>(TYPES.PLUGIN).to(DefaultMatchEngine).whenTargetNamed(DefaultMatchEngine.NAME);
