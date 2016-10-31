@@ -1,6 +1,10 @@
 import { Connection, ConnectionManager, createConnection } from 'typeorm';
 import { inject, injectable } from 'inversify';
-import { IDatabaseProvider } from './';
+
+export interface IDatabaseProvider {
+	connection: Connection;
+    connect(): Promise<Connection>
+}
 
 @injectable()
 export class DatabaseProvider implements IDatabaseProvider {

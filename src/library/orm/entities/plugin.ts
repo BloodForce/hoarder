@@ -1,12 +1,17 @@
-import { SeedBox } from './seed-box';
-import { IPlugin, PLUGIN_TYPE } from '../';
+import { PLUGIN_TYPE } from '../../plugin';
+import { SeedBoxEntity } from './seed-box';
 import { injectable } from 'inversify';
 import { Column, ManyToOne, PrimaryGeneratedColumn, Table } from 'typeorm';
 
+export interface IPluginEntity {
+	id?: number;
+	name: string;
+	type: PLUGIN_TYPE
+}
 
 @Table()
 @injectable()
-export class Plugin implements IPlugin {
+export class PluginEntity implements IPluginEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -16,6 +21,6 @@ export class Plugin implements IPlugin {
     @Column('int')
     type: PLUGIN_TYPE
 
-    @ManyToOne(type => SeedBox, seedBox => seedBox.plugins)
-    seedBox: SeedBox;
+    @ManyToOne(type => SeedBoxEntity, seedBox => seedBox.plugins)
+    seedBox: SeedBoxEntity;
 }

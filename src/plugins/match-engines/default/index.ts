@@ -1,10 +1,10 @@
-import { PLUGIN_TYPE } from '../../../library/orm';
+import { Plugins } from '../../../library';
 import { IMatchEnginePlugin } from './../../../library/plugin/index';
 import { injectable } from 'inversify';
 
 @injectable()
 export class DefaultMatchEngine implements IMatchEnginePlugin {
-	public static TYPE = PLUGIN_TYPE.MATCH_ENGINE;
+	public static TYPE = Plugins.PLUGIN_TYPE.MATCH_ENGINE;
 	public static NAME = 'Default Match Engine';
 
 	init(config: any) {

@@ -1,17 +1,17 @@
 import { TYPES } from '../../../inversify.types';
-import { IDatabaseProvider, IMovie } from '../../orm';
-import { Movie } from '../entities/movie';
-import { IRepository } from '../index';
+import { IDatabaseProvider } from '../database-provider';
+import { IMovieEntity, MovieEntity } from '../entities/movie';
+import { IRepository } from './';
 import { inject, injectable } from 'inversify';
 import { Repository } from 'typeorm';
 import { ObjectLiteral } from 'typeorm/common/ObjectLiteral';
 
 @injectable()
-export class MovieRepository implements IRepository<IMovie> {
-    private repository: Repository<IMovie>;
+export class MovieRepository implements IRepository<IMovieEntity> {
+    private repository: Repository<IMovieEntity>;
 
     constructor( @inject(TYPES.DATABASE_PROVIDER) databaseProvider: IDatabaseProvider) {
-        this.repository = databaseProvider.connection.getRepository(Movie);
+        this.repository = databaseProvider.connection.getRepository(MovieEntity);
     }
 
     findOne(options?: ObjectLiteral) {
@@ -22,17 +22,17 @@ export class MovieRepository implements IRepository<IMovie> {
         return this.repository.find(options);
     }
 
-    create(object: IMovie) {
+    create(object: IMovieEntity) {
         let entity = this.repository.create(object);
 
         return this.repository.persist(entity);
     }
 
-    update(entity: IMovie) {
+    update(entity: IMovieEntity) {
         return this.repository.persist(entity);
     }
 
-    remove(entity: IMovie) {
+    remove(entity: IMovieEntity) {
         return this.repository.remove(entity);
     }
 

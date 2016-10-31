@@ -1,10 +1,10 @@
 import { injectable } from 'inversify';
-import { PLUGIN_TYPE } from '../../../library/orm';
+import { Plugins } from '../../../library';
 import { ITorrentProviderPlugin } from './../../../library/plugin/index';
 
 @injectable()
 export class PirateBay implements ITorrentProviderPlugin {
-	public static TYPE = PLUGIN_TYPE.TORRENT_PROVIDER;
+	public static TYPE = Plugins.PLUGIN_TYPE.TORRENT_PROVIDER;
 	public static NAME = 'Pirate Bay';
 
 	init(config: any) {

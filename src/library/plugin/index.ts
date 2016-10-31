@@ -1,6 +1,10 @@
 import { TYPES } from '../../inversify.types';
 import { inject, injectable } from 'inversify';
-import { PLUGIN_TYPE } from '../orm';
+
+export enum PLUGIN_TYPE {
+	TORRENT_PROVIDER,
+	MATCH_ENGINE
+};
 
 export interface IPluginConfig {
     name: string;

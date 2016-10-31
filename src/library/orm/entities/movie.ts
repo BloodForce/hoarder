@@ -1,10 +1,16 @@
 import { injectable } from 'inversify';
-import { IMovie } from './../index';
-import {Table, Column, PrimaryGeneratedColumn} from "typeorm";
+import { Column, PrimaryGeneratedColumn, Table } from 'typeorm';
+
+export interface IMovieEntity {
+	id?: number;
+	title: string;
+	description: string;
+	year: number;
+}
 
 @Table()
 @injectable()
-export class Movie implements IMovie {
+export class MovieEntity implements IMovieEntity {
 	@PrimaryGeneratedColumn()
 	id: number;
 

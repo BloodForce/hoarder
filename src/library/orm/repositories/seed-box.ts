@@ -1,16 +1,16 @@
 import { TYPES } from '../../../inversify.types';
-import { IDatabaseProvider, ISeedBox } from '../../orm';
-import { SeedBox } from '../entities/seed-box';
-import { IRepository } from '../index';
+import { IDatabaseProvider } from '../database-provider';
+import { ISeedBoxEntity, SeedBoxEntity } from '../entities/seed-box';
+import { IRepository } from './';
 import { inject, injectable } from 'inversify';
 import { FindOptions, Repository } from 'typeorm';
 
 @injectable()
-export class SeedBoxRepository implements IRepository<ISeedBox> {
-    private repository: Repository<ISeedBox>;
+export class SeedBoxRepository implements IRepository<ISeedBoxEntity> {
+    private repository: Repository<ISeedBoxEntity>;
 
     constructor( @inject(TYPES.DATABASE_PROVIDER) databaseProvider: IDatabaseProvider) {
-        this.repository = databaseProvider.connection.getRepository<ISeedBox>(SeedBox);
+        this.repository = databaseProvider.connection.getRepository<ISeedBoxEntity>(SeedBoxEntity);
     }
 
     findOne() {
@@ -21,17 +21,17 @@ export class SeedBoxRepository implements IRepository<ISeedBox> {
         return this.repository.find();
     }
 
-    create(object: ISeedBox) {
+    create(object: ISeedBoxEntity) {
         let entity = this.repository.create(object);
 
         return this.repository.persist(entity);
     }
 
-    update(entity: ISeedBox) {
+    update(entity: ISeedBoxEntity) {
         return this.repository.persist(entity);
     }
 
-    remove(entity: ISeedBox) {
+    remove(entity: ISeedBoxEntity) {
         return this.repository.remove(entity);
     }
 

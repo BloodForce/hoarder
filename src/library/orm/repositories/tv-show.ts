@@ -1,16 +1,16 @@
 import { TYPES } from '../../../inversify.types';
-import { IDatabaseProvider, ITvShow } from '../../orm';
-import { TvShow } from '../entities/tv-show';
-import { IRepository } from '../index';
+import { IDatabaseProvider } from '../database-provider';
+import { ITvShowEntity, TvShowEntity } from '../entities/tv-show';
+import { IRepository } from './';
 import { inject, injectable } from 'inversify';
 import { FindOptions, Repository } from 'typeorm';
 
 @injectable()
-export class TvShowRepository implements IRepository<ITvShow> {
-    private repository: Repository<ITvShow>;
+export class TvShowRepository implements IRepository<ITvShowEntity> {
+    private repository: Repository<ITvShowEntity>;
 
     constructor( @inject(TYPES.DATABASE_PROVIDER) databaseProvider: IDatabaseProvider) {
-        this.repository = databaseProvider.connection.getRepository(TvShow);
+        this.repository = databaseProvider.connection.getRepository(TvShowEntity);
     }
 
     findOne() {
@@ -21,17 +21,17 @@ export class TvShowRepository implements IRepository<ITvShow> {
         return this.repository.find();
     }
 
-    create(object: ITvShow) {
+    create(object: ITvShowEntity) {
         let entity = this.repository.create(object);
 
         return this.repository.persist(entity);
     }
 
-    update(entity: ITvShow) {
+    update(entity: ITvShowEntity) {
         return this.repository.persist(entity);
     }
 
-    remove(entity: ITvShow) {
+    remove(entity: ITvShowEntity) {
         return this.repository.remove(entity);
     }
 
