@@ -6,13 +6,10 @@ import { DefaultMatchEngine } from './plugins/match-engines/default';
 import { HDTorrents } from './plugins/torrent-providers/hd-torrents';
 import { PirateBay } from './plugins/torrent-providers/pirate-bay';
 import { interfaces, Kernel } from 'inversify';
-import { autoProvide } from 'inversify-binding-decorators';
-import { ConnectionManager, Repository } from 'typeorm';
 
 let kernel = new Kernel();
 
 // ORM Bindings
-autoProvide(kernel, [ConnectionManager]);
 kernel.bind<Orm.IDatabaseContext>(TYPES.DATABASE_CONTEXT).to(DatabaseContext).inSingletonScope();
 kernel.bind<Orm.IDatabase>(TYPES.DATABASE).to(Database).inSingletonScope();
 
