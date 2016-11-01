@@ -3,4 +3,6 @@ import { IPluginEntity } from './plugin';
 import { ISeedBoxEntity } from './seed-box';
 import { ITvShowEntity } from './tv-show';
 
-export { IMovieEntity, IPluginEntity, ISeedBoxEntity, ITvShowEntity }
+interface IEntity {};
+
+export { IEntity, IMovieEntity, IPluginEntity, ISeedBoxEntity, ITvShowEntity }

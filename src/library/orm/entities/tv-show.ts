@@ -1,7 +1,8 @@
+import { IEntity } from './';
 import { injectable } from 'inversify';
 import { Column, PrimaryGeneratedColumn, Table } from 'typeorm';
 
-export interface ITvShowEntity {
+export interface ITvShowEntity extends IEntity {
 	id?: number;
 	title: string;
 	description: string;

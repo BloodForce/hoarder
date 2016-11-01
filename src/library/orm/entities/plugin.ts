@@ -1,9 +1,10 @@
+import { IEntity } from './';
 import { PLUGIN_TYPE } from '../../plugin';
 import { SeedBoxEntity } from './seed-box';
 import { injectable } from 'inversify';
 import { Column, ManyToOne, PrimaryGeneratedColumn, Table } from 'typeorm';
 
-export interface IPluginEntity {
+export interface IPluginEntity extends IEntity {
 	id?: number;
 	name: string;
 	type: PLUGIN_TYPE

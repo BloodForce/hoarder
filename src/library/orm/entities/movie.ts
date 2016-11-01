@@ -1,7 +1,9 @@
+import { IEntity } from './';
+import * as console from 'console';
 import { injectable } from 'inversify';
 import { Column, PrimaryGeneratedColumn, Table } from 'typeorm';
 
-export interface IMovieEntity {
+export interface IMovieEntity extends IEntity {
 	id?: number;
 	title: string;
 	description: string;
