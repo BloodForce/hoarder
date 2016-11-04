@@ -7,19 +7,23 @@
     "node": ">= 6.2.0"
   },
   "dependencies": {
+    "fs-finder": "^1.8.1",
     "inversify": "2.0.1",
     "inversify-binding-decorators": "^2.0.0",
     "inversify-inject-decorators": "^2.0.0",
     "later": "1.2.0",
     "reflect-metadata": "0.1.8",
     "sqlite3": "3.1.8",
+    "systemjs": "^0.19.40",
     "typeorm": "0.0.2-alpha.69"
   },
   "devDependencies": {
+    "@types/fs-finder": "^1.8.28",
     "@types/later": "0.0.28",
     "@types/node": "6.0.45",
     "@types/sequelize": "4.0.38",
     "@types/sqlite3": "^2.2.31",
+    "@types/systemjs": "^0.19.31",
     "del": "2.2.2",
     "gulp": "3.9.1",
     "gulp-nodemon": "2.2.1",

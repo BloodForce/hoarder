@@ -1,12 +1,7 @@
 import { Plugins } from '../../../library';
-import { ITorrentProviderPlugin } from '../../../library/plugin';
-import { injectable } from 'inversify';
 
-@injectable()
-export class HDTorrents implements ITorrentProviderPlugin {
-	public static TYPE = Plugins.PLUGIN_TYPE.TORRENT_PROVIDER;
-	public static NAME = 'HD Torrents';
-
+@Plugins.registerTorrentProvider()
+export class HDTorrents implements Plugins.ITorrentProviderPlugin {
 	init(config: any) {
 		console.log(config)
 	}

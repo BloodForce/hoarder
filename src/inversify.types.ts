@@ -5,5 +5,8 @@ export const TYPES = {
     ENTITY: Symbol('ENTITY'),
     SEED_BOX: Symbol('SEED_BOX'),
     PLUGIN_FACTORY: Symbol('PLUGIN_FACTORY'),
-    PLUGIN: Symbol('PLUGIN'),
+    TORRENT_PROVIDER: Symbol('TORRENT_PROVIDER'),
+    MATCH_ENGINE: Symbol('MATCH_ENGINE'),
+    TORRENT_CLIENT: Symbol('TORRENT_CLIENT'),
+    MEDIA_DATABASE: Symbol('MEDIA_DATABASE')
 };
