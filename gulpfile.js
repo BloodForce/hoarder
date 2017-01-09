@@ -44,19 +44,17 @@ gulp.task('plugins-typescript', () => {
 
 
 /* ---------- TYPES ---------- */
-const typesProject = tsc.createProject('tsconfig.json', {
-	declaration: true,
-	typescript: require('typescript')
-});
 
 gulp.task('type-definitions', () => {
 	return gulp.src('types/index.ts')
-		.pipe(typesProject())
 		.on('error', function () {
 			process.exit(1);
 		})
-		.pipe(rename('hoarder.d.ts'))
-		.pipe(gulp.dest('build/server/types'));
+		.pipe(rename(function (path) {
+			path.dirname = '';
+			path.basename = 'hoarder.d';
+		}))
+		.pipe(gulp.dest('build/server'));
 });
 
 

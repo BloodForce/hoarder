@@ -8,8 +8,5 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
-  },
-  "exclude": [
-    "build/**/*"
-  ]
+  }
 }
