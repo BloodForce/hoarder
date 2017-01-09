@@ -1,0 +1,37 @@
+{
+  "name": "hoarder-server",
+  "version": "0.0.0",
+  "description": "Plugin Driven PVR Built in Node.js",
+  "author": "Chris Shepherd <chris.shepherd@email.com> (https://github.com/Shepless/hoarder)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shepless/hoarder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Shepless/hoarder/issues"
+  },
+  "homepage": "https://github.com/Shepless/hoarder#readme",
+  "scripts": {},
+  "main": "index.js",
+  "typings": "./types/hoarder.d.ts",
+  "engineStrict": true,
+  "engines": {
+    "node": ">= 6.2.0"
+  },
+  "dependencies": {
+    "fs-finder": "1.8.1",
+    "later": "1.2.0",
+    "reflect-metadata": "0.1.9",
+    "sqlite3": "3.1.8",
+    "typeorm": "0.0.5",
+    "hoarder-plugin-hd-torrents": "0.0.0"
+  },
+  "devDependencies": {
+    "@types/fs-finder": "1.8.28",
+    "@types/later": "0.0.28",
+    "@types/node": "6.0.45",
+    "@types/sequelize": "4.0.38",
+    "@types/sqlite3": "2.2.31"
+  }
+}

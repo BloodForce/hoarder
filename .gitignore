@@ -1,9 +1,5 @@
-logs
-*.log
-npm-debug.log*
-node_modules/
-coverage
-build/
 .DS_Store
-.idea/*
-.vscode/*
+node_modules/
+build/
+.idea/
+*.log

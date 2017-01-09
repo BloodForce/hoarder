@@ -1,49 +1,24 @@
 {
   "name": "hoarder",
-  "version": "0.0.0",
-  "description": "Plugin Driven PVR Built in Node.js",
-  "engineStrict": true,
-  "engines": {
-    "node": ">= 6.2.0"
-  },
-  "dependencies": {
-    "fs-finder": "^1.8.1",
-    "inversify": "2.0.1",
-    "inversify-binding-decorators": "^2.0.0",
-    "inversify-inject-decorators": "^2.0.0",
-    "later": "1.2.0",
-    "reflect-metadata": "0.1.8",
-    "sqlite3": "3.1.8",
-    "systemjs": "^0.19.40",
-    "typeorm": "0.0.2-alpha.69"
-  },
+  "version": "1.0.0",
+  "description": "Heavily WIP!",
   "devDependencies": {
-    "@types/fs-finder": "^1.8.28",
-    "@types/later": "0.0.28",
-    "@types/node": "6.0.45",
-    "@types/sequelize": "4.0.38",
-    "@types/sqlite3": "^2.2.31",
-    "@types/systemjs": "^0.19.31",
     "del": "2.2.2",
     "gulp": "3.9.1",
-    "gulp-nodemon": "2.2.1",
     "gulp-typescript": "3.0.2",
-    "rimraf": "2.5.4",
+    "lerna": "2.0.0-beta.32",
+    "run-sequence": "^1.2.2",
     "typescript": "2.0.6"
   },
   "scripts": {
-    "clean": "rimraf coverage build tmp",
-    "build": "tsc -p tsconfig.release.json",
-    "watch": "tsc -w -p tsconfig.release.json",
-    "lint": "tslint -t stylish '{src,test}/**/*.{ts}'",
-    "start": "npm run watch; node build/src/main"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Chris Shepherd <chris.shepherd@email.com> (https://github.com/Shepless/hoarder)",
-  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Shepless/hoarder.git"
+    "url": "git+https://github.com/Shepless/hoarder.git"
   },
+  "author": "Shepless (http://shepless.github.io/)",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/Shepless/hoarder/issues"
   },
