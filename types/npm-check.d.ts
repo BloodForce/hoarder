@@ -13,5 +13,6 @@ declare module "npm-check" {
 	}
 
 	var npmCheck: INpmCheck;
+
 	export = npmCheck;
 }

@@ -2,14 +2,11 @@ declare module "npm-module-search" {
 	interface INpmSearchCallback {
 		(error: Error, packages: Array<Object>): void;
 	}
-	interface INpmSearchOtions {
+
+	interface INpmSearchOptions {
 		limit: number;
 	}
-	interface INpmSearch {
-		search(packageName: string, callback: INpmSearchCallback): void;
-		search(packageName: string, limit: INpmSearchOtions, callback: INpmSearchCallback): void;
-	}
 
-	var npmSearch: INpmSearch;
-	export = npmSearch;
+	export function search (packageName: string, options: INpmSearchOptions, callback: INpmSearchCallback): void;
+	export function search (packageName: string, callback: INpmSearchCallback): void;
 }

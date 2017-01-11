@@ -22,6 +22,10 @@
   "dependencies": {
     "fs-finder": "1.8.1",
     "hoarder-plugin-hd-torrents": "0.0.0",
+    "hoarder-plugin-pirate-bay": "0.0.0",
+    "hoarder-plugin-tmdb": "0.0.0",
+    "hoarder-plugin-movie-match-engine": "0.0.0",
+    "hoarder-plugin-transmission": "0.0.0",
     "later": "1.2.0",
     "npm": "^4.0.5",
     "npm-check": "^5.4.0",

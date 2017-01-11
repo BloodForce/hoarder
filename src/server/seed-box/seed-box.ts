@@ -1,15 +1,17 @@
-import {IPluginConfig} from "../../../types/index";
+import {PackageManager} from "../plugin/package-manager";
+import {PluginRegistry} from "../plugin/plugin-registry";
 
 export class SeedBox {
-	private factory: <T>(config: IPluginConfig) => T;
+	public packages: PackageManager;
+	public registry: PluginRegistry;
 
-	public plugins: Array<any>;
-
-	constructor() {
-		this.plugins = [];
+	constructor(packageManager: PackageManager, registry: PluginRegistry) {
+		this.packages = packageManager;
+		this.registry = registry;
 	}
 
-	createPlugins(config: Array<IPluginConfig>) {
-		this.plugins = config.map((c) => this.factory<any>(c));
+	async init() {
+		const packages = await this.packages.findInstalled();
+		packages.map((pkg: any) => require(pkg.name).default).forEach((factory) => factory(this.registry));
 	}
 }

@@ -1,5 +1,6 @@
 import {resolve} from "path";
 import * as npmSearch from 'npm-module-search';
+import {INpmSearchOptions} from "npm-module-search";
 import * as npmCheck from 'npm-check';
 import * as prise from 'prise';
 
@@ -33,9 +34,9 @@ export class PackageManager {
 			.then((packages: string[]) => packages.filter((module: any) => module.moduleName.indexOf('hoarder-plugin-') > -1));
 	}
 
-	search(packageName: string): Promise<Array<Object>> {
+	search(packageName: string, options?: INpmSearchOptions): Promise<Array<Object>> {
 		return new Promise((resolve, reject) => {
-			npmSearch.search(packageName, {limit: 2}, (error: Error, packages: Array<Object>) => {
+			npmSearch.search(packageName, options, (error: Error, packages: Array<Object>) => {
 				if (error) {
 					return reject(error);
 				}

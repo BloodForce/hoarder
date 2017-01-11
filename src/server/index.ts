@@ -1,15 +1,16 @@
 import 'reflect-metadata';
 import {PackageManager} from "./plugin/package-manager";
+import {PluginRegistry} from "./plugin/plugin-registry";
+import {SeedBox} from "./seed-box/seed-box";
 
 const packageManager = new PackageManager();
+const registry = new PluginRegistry();
+const seedBox = new SeedBox(packageManager, registry);
 
 (async function () {
-	let packages = await packageManager.findInstalled();
-	console.log(packages);
+	await seedBox.init();
+	console.log(seedBox.registry);
 
-	let outdated = await packageManager.findOutDated();
-	console.log(outdated);
-
-	let results = await packageManager.search('lodash');
+	const results = await seedBox.packages.search('plex api', {limit: 5});
 	console.log(results);
 })();
