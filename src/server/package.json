@@ -21,16 +21,21 @@
   },
   "dependencies": {
     "fs-finder": "1.8.1",
+    "hoarder-plugin-hd-torrents": "0.0.0",
     "later": "1.2.0",
+    "npm": "^4.0.5",
+    "npm-check": "^5.4.0",
+    "npm-module-search": "^1.0.1",
+    "npminstall": "^2.16.0",
+    "prise": "^1.1.1",
     "reflect-metadata": "0.1.9",
     "sqlite3": "3.1.8",
-    "typeorm": "0.0.5",
-    "hoarder-plugin-hd-torrents": "0.0.0"
+    "typeorm": "0.0.5"
   },
   "devDependencies": {
     "@types/fs-finder": "1.8.28",
     "@types/later": "0.0.28",
-    "@types/node": "6.0.45",
+    "@types/npm": "^2.0.28",
     "@types/sequelize": "4.0.38",
     "@types/sqlite3": "2.2.31"
   }

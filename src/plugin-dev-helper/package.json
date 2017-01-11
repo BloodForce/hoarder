@@ -1,18 +1,10 @@
 {
-  "name": "hoarder",
+  "name": "hoarder-plugin-dev-helper",
   "version": "1.0.0",
   "description": "Heavily WIP!",
   "devDependencies": {
-    "del": "2.2.2",
-    "gulp": "3.9.1",
-    "gulp-typescript": "3.0.2",
-    "lerna": "2.0.0-beta.32",
-    "run-sequence": "^1.2.2",
-    "typescript": "2.0.6"
   },
   "scripts": {
-    "build": "gulp clean; gulp build;",
-    "watch": "gulp clean; gulp build; lerna bootstrap; gulp watch;",
     "server": "node ./build/server/index.js"
   },
   "repository": {

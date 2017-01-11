@@ -1,46 +1,31 @@
 import {IPluginConstructor} from "../../../types/index";
 
 export class PluginRegistry {
-	private plugins: Map<symbol, IPluginConstructor>;
-
-	private register(ctor: IPluginConstructor) {
-		let symbol = Symbol(1);
-
-		this.plugins.set(symbol, ctor);
-
-		return symbol;
-	}
+	private matchEngines: {}[];
+	private torrentClients: {}[];
+	private torrentProviders: {}[];
+	private mediaDatabases: {}[];
 
 	constructor() {
-		this.plugins = new Map();
+		this.matchEngines = [];
+		this.torrentClients = [];
+		this.torrentProviders = [];
+		this.mediaDatabases = [];
 	}
 
-	find<T>(symbol: symbol) {
-		let Plugin = this.plugins.get(symbol);
-
-		if (Plugin) {
-			return <T>new Plugin({
-				name: 'foo',
-				type: symbol
-			});
-		}
-
-		return null;
+	registerMatchEngine(ctor: IPluginConstructor): void {
+		this.matchEngines.push(ctor);
 	}
 
-	registerMatchEngine(ctor: IPluginConstructor) {
-		return this.register(ctor);
+	registerTorrentProvider(ctor: IPluginConstructor): void {
+		this.torrentClients.push(ctor);
 	}
 
-	registerTorrentProvider(ctor: IPluginConstructor) {
-		return this.register(ctor);
+	registerTorrentClient(ctor: IPluginConstructor): void {
+		this.torrentProviders.push(ctor);
 	}
 
-	registerTorrentClient(ctor: IPluginConstructor) {
-		return this.register(ctor);
-	}
-
-	registerMediaDatabase(ctor: IPluginConstructor) {
-		return this.register(ctor);
+	registerMediaDatabase(ctor: IPluginConstructor): void {
+		this.mediaDatabases.push(ctor);
 	}
 }

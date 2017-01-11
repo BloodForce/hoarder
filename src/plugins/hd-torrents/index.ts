@@ -2,7 +2,7 @@ import {ITorrentProviderPlugin, IPluginConfig, IPluginRegistry} from "../../../t
 
 class HDTorrents implements ITorrentProviderPlugin {
 	constructor(config: IPluginConfig) {
-		console.log(config)
+		console.log('Config -->', config)
 	}
 
 	findTorrents() {

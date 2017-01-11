@@ -1,12 +1,15 @@
 import 'reflect-metadata';
-import {PluginRegistry} from "./plugin/plugin-registry";
-import {ITorrentProviderPlugin} from "../../types/index";
+import {PackageManager} from "./plugin/package-manager";
 
-let r = new PluginRegistry();
-let factory = require('hoarder-plugin-hd-torrents').default;
-let symbol = factory(r);
-let hdTorrents = r.find<ITorrentProviderPlugin>(symbol);
+const packageManager = new PackageManager();
 
-console.log(11111)
+(async function () {
+	let packages = await packageManager.findInstalled();
+	console.log(packages);
 
-hdTorrents.findTorrents();
+	let outdated = await packageManager.findOutDated();
+	console.log(outdated);
+
+	let results = await packageManager.search('lodash');
+	console.log(results);
+})();
