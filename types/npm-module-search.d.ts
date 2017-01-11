@@ -7,6 +7,6 @@ declare module "npm-module-search" {
 		limit: number;
 	}
 
-	export function search (packageName: string, options: INpmSearchOptions, callback: INpmSearchCallback): void;
 	export function search (packageName: string, callback: INpmSearchCallback): void;
+	export function search (packageName: string, options: INpmSearchOptions, callback: INpmSearchCallback): void;
 }
