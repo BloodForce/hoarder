@@ -11,8 +11,8 @@
     "typescript": "2.0.6"
   },
   "scripts": {
-    "build": "gulp clean; gulp build;",
-    "watch": "gulp clean; gulp build; lerna bootstrap; gulp watch;",
+    "build": "gulp build; lerna bootstrap; npm run server;",
+    "watch": "gulp build; lerna bootstrap; npm run server; gulp watch;",
     "server": "node ./build/server/index.js"
   },
   "repository": {
