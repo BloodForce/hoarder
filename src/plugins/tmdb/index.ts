@@ -6,7 +6,11 @@ class Tmdb implements IMediaDatabasePlugin {
 	}
 
 	search() {
-		console.log('Searching for movie/tv show using TMDB')
+		console.log('TMDB is searching for a movie/tv show')
+	}
+
+	getUpdates() {
+		console.log('TMDB is looking for updates')
 	}
 }
 

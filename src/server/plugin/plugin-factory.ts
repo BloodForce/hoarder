@@ -1,53 +1,34 @@
 import {SeedBox} from "../seed-box/seed-box";
 import {PluginEntity} from "../orm/entities/plugin";
-import {
-	IPluginRegistryEntry, ITorrentClientPlugin, INotifierPlugin, IMediaDatabasePlugin,
-	IMatchEnginePlugin
-} from "../../../types/index";
-import {ITorrentProviderPlugin} from "../../../build/server/hoarder";
+import {IPluginRegistryEntry, IPlugin} from "../../../types/index";
 import {PluginType} from "./plugin-registry";
 
 export class PluginFactory {
-	static async createForSeedBox(seedBox: SeedBox) {
-		let plugins = await seedBox.config.plugins.reduce((chain: Promise<any>, pluginConfig: PluginEntity, index: number, array: any[]) => {
+
+	static async createForSeedBox(seedBox: SeedBox): Promise<Map<PluginType, IPlugin[]>> {
+		let pluginMap = new Map<PluginType, IPlugin[]>();
+
+		await seedBox.config.plugins.reduce((chain: Promise<any>, pluginConfig: PluginEntity) => {
+
 			return chain
 				.then(() => seedBox.packages.findPackageForPlugin(pluginConfig))
 				.then((pkg: any) => require(pkg.name).default)
 				.then((factoryFn) => factoryFn(seedBox.registry))
-				.then((entry: IPluginRegistryEntry) => array.push({
-					plugin: new entry.ctor(<any>pluginConfig.config),
-					type: entry.type
-				}))
-				.then(() => array)
-				.catch(e => console.log(e));
+				.then((entry: IPluginRegistryEntry) => {
+					let plugin = new entry.ctor(<any>pluginConfig.config),
+						plugins = pluginMap.get(entry.type);
+
+					if (!plugins) {
+						plugins = [plugin];
+					} else {
+						plugins.push(plugin);
+					}
+
+					pluginMap.set(entry.type, plugins);
+				});
+
 		}, Promise.resolve());
 
-		return plugins.reduce((plugins: any, item: any) => {
-			switch (item.type) {
-				case PluginType.MatchEngine:
-					plugins.matchEngines.push(item.plugin);
-					break;
-				case PluginType.MediaDatabase:
-					plugins.mediaDatabases.push(item.plugin);
-					break;
-				case PluginType.Notifier:
-					plugins.notifiers.push(item.plugin);
-					break;
-				case PluginType.TorrentClient:
-					plugins.torrentClients.push(item.plugin);
-					break;
-				case PluginType.TorrentProvider:
-					plugins.torrentProviders.push(item.plugin);
-					break;
-			}
-
-			return plugins;
-		}, {
-			torrentClients: [] as ITorrentClientPlugin[],
-			torrentProviders: [] as ITorrentProviderPlugin[],
-			notifiers: [] as INotifierPlugin[],
-			mediaDatabases: [] as IMediaDatabasePlugin[],
-			matchEngines: [] as IMatchEnginePlugin[]
-		})
+		return pluginMap;
 	}
 }
