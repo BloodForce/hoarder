@@ -18,7 +18,6 @@ export class SeedBox {
 
 	async init(seedBoxEntity: SeedBoxEntity) {
 		this.config = seedBoxEntity;
-		await this.packages.findInstalled();
 		this.plugins = await PluginFactory.createForSeedBox(this);
 	}
 
