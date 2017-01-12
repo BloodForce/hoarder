@@ -1,5 +1,3 @@
-import {PluginType} from "../src/server/plugin/plugin-registry";
-
 export interface IPluginConfig {
 	name: string;
 	type: symbol;
@@ -14,16 +12,19 @@ export interface IPlugin {
 }
 
 export interface ITorrentProviderPlugin extends IPlugin {
-	findTorrents(): void;
+	pollRss(): Promise<any>;
+	findTorrents(): Promise<any>;
 }
 
 export interface ITorrentClientPlugin extends IPlugin {
+	pollTorrents(): Promise<any>;
 }
 
 export interface IMatchEnginePlugin extends IPlugin {
 }
 
 export interface IMediaDatabasePlugin extends IPlugin {
+	getUpdates(): Promise<any>;
 }
 
 export interface INotifierPlugin extends IPlugin {
@@ -31,7 +32,7 @@ export interface INotifierPlugin extends IPlugin {
 }
 
 export interface IPluginRegistryEntry {
-	type: PluginType,
+	type: number,
 	ctor: IPluginConstructor
 }
 

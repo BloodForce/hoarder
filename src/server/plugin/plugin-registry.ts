@@ -1,12 +1,5 @@
 import {IPluginConstructor, IPluginRegistry, IPluginRegistryEntry} from "../../../types/index";
-
-export enum PluginType {
-	MatchEngine,
-	TorrentProvider,
-	TorrentClient,
-	MediaDatabase,
-	Notifier
-}
+import {PluginType} from "./plugin-type";
 
 export class PluginRegistry implements IPluginRegistry {
 	matchEngines: Array<IPluginConstructor>;

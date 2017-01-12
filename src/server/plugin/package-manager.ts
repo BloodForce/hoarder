@@ -1,8 +1,7 @@
 import {resolve} from "path";
-import * as npmSearch from 'npm-module-search';
-import {INpmSearchOptions} from "npm-module-search";
-import * as npmCheck from 'npm-check';
 import * as prise from 'prise';
+import * as npmSearch from 'npm-module-search';
+import * as npmCheck from 'npm-check';
 import {PluginEntity} from "../orm/entities/plugin";
 
 export class PackageManager {
@@ -14,7 +13,7 @@ export class PackageManager {
 		this.installLocation = resolve(this.rootInstallLocation, 'node_modules');
 	}
 
-	async findPackageForPlugin(pluginConfig: PluginEntity) {
+	async findPackageForPlugin(pluginConfig: PluginEntity): Promise<PackageJson> {
 		let plugins = await this.findInstalled();
 
 		let installedPlugin = plugins.find(plugin => plugin.name === pluginConfig.name);
@@ -22,9 +21,9 @@ export class PackageManager {
 		return installedPlugin ? Promise.resolve(installedPlugin) : Promise.reject(pluginConfig);
 	}
 
-	findInstalled(): Promise<any[]> {
+	findInstalled(): Promise<PackageJson[]> {
 		return new Promise((resolve, reject) => {
-			prise(this.installLocation, 'hoarder-plugin-', function (error: Error, packages: {}[]) {
+			prise(this.installLocation, 'hoarder-plugin-', function (error: Error, packages: PackageJson[]) {
 				if (error) {
 					return reject(error);
 				}
@@ -34,18 +33,18 @@ export class PackageManager {
 		});
 	}
 
-	findOutDated(): Promise<{}[]> {
+	findOutDated(): Promise<string[]> {
 		return this.findInstalled()
 			.then(() => npmCheck({
 				cwd: this.rootInstallLocation
 			}))
-			.then((currentState: any) => currentState.get('packages'))
-			.then((packages: string[]) => packages.filter((module: any) => module.moduleName.indexOf('hoarder-plugin-') > -1));
+			.then((currentState: NpmCheckCurrentState) => currentState.get('packages'))
+			.then((packages: NpmCheckState[]) => packages.filter((module: NpmCheckState) => module.moduleName.indexOf('hoarder-plugin-') > -1));
 	}
 
-	search(packageName: string, options?: INpmSearchOptions): Promise<Array<Object>> {
+	search(packageName: string, options?: NpmSearchModuleOptions): Promise<Array<NpmSearchModuleResult>> {
 		return new Promise((resolve, reject) => {
-			npmSearch.search(packageName, options, (error: Error, packages: Array<Object>) => {
+			npmSearch.search(packageName, options, (error: Error, packages: Array<NpmSearchModuleResult>) => {
 				if (error) {
 					return reject(error);
 				}

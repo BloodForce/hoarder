@@ -1,4 +1,4 @@
-import {IMatchEnginePlugin, IPluginConfig, IPluginRegistry} from "../../../types";
+import {IMatchEnginePlugin, IPluginConfig, IPluginRegistry, IPluginRegistryEntry} from "../../../types";
 
 class MovieMatchEngine implements IMatchEnginePlugin {
 	constructor(config: IPluginConfig) {
@@ -6,10 +6,11 @@ class MovieMatchEngine implements IMatchEnginePlugin {
 	}
 
 	match() {
-		console.log('Default match engine running...')
+		console.log('Default match engine running...');
+		return Promise.resolve();
 	}
 }
 
-export default (PluginRegistry: IPluginRegistry) => {
+export default (PluginRegistry: IPluginRegistry): IPluginRegistryEntry => {
 	return PluginRegistry.registerMatchEngine(MovieMatchEngine);
 };

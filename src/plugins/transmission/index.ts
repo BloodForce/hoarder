@@ -1,4 +1,4 @@
-import {ITorrentClientPlugin, IPluginConfig, IPluginRegistry} from "../../../types";
+import {ITorrentClientPlugin, IPluginConfig, IPluginRegistry, IPluginRegistryEntry} from "../../../types";
 
 class Transmission implements ITorrentClientPlugin {
 	constructor(config: IPluginConfig) {
@@ -6,14 +6,16 @@ class Transmission implements ITorrentClientPlugin {
 	}
 
 	pollTorrents() {
-		console.log('Transmission is polling for torrent statuses')
+		console.log('Transmission is polling for torrent statuses');
+		return Promise.resolve();
 	}
 
 	uploadTorrent() {
-		console.log('Uploading torrent to Transmission')
+		console.log('Uploading torrent to Transmission');
+		return Promise.resolve();
 	}
 }
 
-export default (PluginRegistry: IPluginRegistry) => {
+export default (PluginRegistry: IPluginRegistry): IPluginRegistryEntry => {
 	return PluginRegistry.registerTorrentClient(Transmission);
 };

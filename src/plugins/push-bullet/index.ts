@@ -1,4 +1,4 @@
-import {IPluginRegistry, INotifierPlugin, IPluginConfig} from "../../../types/index";
+import {IPluginRegistry, INotifierPlugin, IPluginConfig, IPluginRegistryEntry} from "../../../types/index";
 
 class PushBulletPlugin implements INotifierPlugin {
 	config: IPluginConfig;
@@ -13,6 +13,6 @@ class PushBulletPlugin implements INotifierPlugin {
 	}
 }
 
-export default (registry: IPluginRegistry) => {
+export default (registry: IPluginRegistry): IPluginRegistryEntry => {
 	return registry.registerNotifier(PushBulletPlugin);
 };

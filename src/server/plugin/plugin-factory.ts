@@ -1,7 +1,7 @@
 import {SeedBox} from "../seed-box/seed-box";
 import {PluginEntity} from "../orm/entities/plugin";
 import {IPluginRegistryEntry, IPlugin} from "../../../types/index";
-import {PluginType} from "./plugin-registry";
+import {PluginType} from "./plugin-type";
 
 export class PluginFactory {
 
@@ -12,10 +12,10 @@ export class PluginFactory {
 
 			return chain
 				.then(() => seedBox.packages.findPackageForPlugin(pluginConfig))
-				.then((pkg: any) => require(pkg.name).default)
+				.then((pkg: PackageJson) => require(pkg.name).default)
 				.then((factoryFn) => factoryFn(seedBox.registry))
 				.then((entry: IPluginRegistryEntry) => {
-					let plugin = new entry.ctor(<any>pluginConfig.config),
+					let plugin = new entry.ctor(pluginConfig.config),
 						plugins = pluginMap.get(entry.type);
 
 					if (!plugins) {

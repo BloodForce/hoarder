@@ -1,8 +1,9 @@
 import {PackageManager} from "../plugin/package-manager";
-import {PluginRegistry, PluginType} from "../plugin/plugin-registry";
+import {PluginRegistry} from "../plugin/plugin-registry";
 import {SeedBoxEntity} from "../orm/entities/seed-box";
 import {PluginFactory} from "../plugin/plugin-factory";
-import {IPlugin} from "../../../types/index";
+import {PluginType} from "../plugin/plugin-type";
+import {IPlugin, ITorrentProviderPlugin, ITorrentClientPlugin, IMediaDatabasePlugin} from "../../../types/index";
 
 export class SeedBox {
 	public config: SeedBoxEntity;
@@ -23,15 +24,15 @@ export class SeedBox {
 
 	start() {
 		// TODO: This should live in the Orchestrator objects
-		this.plugins.get(PluginType.TorrentProvider).forEach((torrentProvider: any) => {
+		this.plugins.get(PluginType.TorrentProvider).forEach((torrentProvider: ITorrentProviderPlugin) => {
 			setInterval(() => torrentProvider.pollRss(), this.config.scheduleConfig.rssPollInterval);
 		});
 
-		this.plugins.get(PluginType.TorrentClient).forEach((torrentClient: any) => {
+		this.plugins.get(PluginType.TorrentClient).forEach((torrentClient: ITorrentClientPlugin) => {
 			setInterval(() => torrentClient.pollTorrents(), this.config.scheduleConfig.torrentClientPollInterval);
 		});
 
-		this.plugins.get(PluginType.MediaDatabase).forEach((mediaDatabase: any) => {
+		this.plugins.get(PluginType.MediaDatabase).forEach((mediaDatabase: IMediaDatabasePlugin) => {
 			setInterval(() => mediaDatabase.getUpdates(), 10000);
 		});
 	}
