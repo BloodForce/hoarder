@@ -3,6 +3,7 @@ import * as npmSearch from 'npm-module-search';
 import {INpmSearchOptions} from "npm-module-search";
 import * as npmCheck from 'npm-check';
 import * as prise from 'prise';
+import {PluginEntity} from "../orm/entities/plugin";
 
 export class PackageManager {
 	private rootInstallLocation: string;
@@ -13,7 +14,15 @@ export class PackageManager {
 		this.installLocation = resolve(this.rootInstallLocation, 'node_modules');
 	}
 
-	findInstalled(): Promise<{}[]> {
+	async findPackageForPlugin(pluginConfig: PluginEntity) {
+		let plugins = await this.findInstalled();
+
+		let installedPlugin = plugins.find(plugin => plugin.name === pluginConfig.name);
+
+		return installedPlugin ? Promise.resolve(installedPlugin) : Promise.reject(pluginConfig);
+	}
+
+	findInstalled(): Promise<any[]> {
 		return new Promise((resolve, reject) => {
 			prise(this.installLocation, 'hoarder-plugin-', function (error: Error, packages: {}[]) {
 				if (error) {

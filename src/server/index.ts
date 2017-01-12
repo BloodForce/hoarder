@@ -1,16 +1,11 @@
 import 'reflect-metadata';
-import {PackageManager} from "./plugin/package-manager";
-import {PluginRegistry} from "./plugin/plugin-registry";
-import {SeedBox} from "./seed-box/seed-box";
-
-const packageManager = new PackageManager();
-const registry = new PluginRegistry();
-const seedBox = new SeedBox(packageManager, registry);
+import {Hoarder} from "./app/hoarder";
 
 (async function () {
-	await seedBox.init();
-	console.log(seedBox.registry);
+	let hoarder = new Hoarder();
 
-	const results = await seedBox.packages.search('plex api', {limit: 5});
-	console.log(results);
+	await hoarder.init();
+	await hoarder.initSeedBoxes();
+
+	hoarder.startSchedules();
 })();

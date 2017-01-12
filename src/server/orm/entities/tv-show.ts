@@ -5,12 +5,12 @@ export class TvShowEntity {
 	@PrimaryGeneratedColumn()
 	id: number;
 
-	@Column()
+	@Column('string')
 	title: string;
 
-	@Column()
+	@Column('string')
 	description: string;
 
-	@Column()
+	@Column('smallint')
 	year: number;
 }

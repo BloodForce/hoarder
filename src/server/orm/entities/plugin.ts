@@ -6,9 +6,11 @@ export class PluginEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column('string')
     name: string;
 
+    @Column('json')
+	config: {};
 
     @ManyToOne(type => SeedBoxEntity, seedBox => seedBox.plugins)
     seedBox: SeedBoxEntity;

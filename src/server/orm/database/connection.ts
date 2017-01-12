@@ -1,5 +1,5 @@
-import * as path from 'path';
-import { Connection, createConnection } from 'typeorm';
+import {resolve} from 'path';
+import {Connection, createConnection} from 'typeorm';
 
 export class DatabaseContext {
 	private _connection: Connection;
@@ -15,7 +15,7 @@ export class DatabaseContext {
 				storage: 'build/hoarder.sqlite'
 			},
 			entities: [
-				path.resolve(__dirname, '../entities/*.js')
+				resolve(__dirname, '../entities/*.js')
 			],
 			autoSchemaSync: true
 		});

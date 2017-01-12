@@ -2,7 +2,10 @@ import {ITorrentProviderPlugin, IPluginConfig, IPluginRegistry} from "../../../t
 
 class HDTorrents implements ITorrentProviderPlugin {
 	constructor(config: IPluginConfig) {
-		console.log('Config -->', config)
+	}
+
+	pollRss() {
+		console.log('HDTorrents is polling the RSS Feed')
 	}
 
 	findTorrents() {

@@ -5,11 +5,15 @@ class Transmission implements ITorrentClientPlugin {
 		console.log(config)
 	}
 
+	pollTorrents() {
+		console.log('Transmission is polling for torrent statuses')
+	}
+
 	uploadTorrent() {
 		console.log('Uploading torrent to Transmission')
 	}
 }
 
 export default (PluginRegistry: IPluginRegistry) => {
-	PluginRegistry.registerTorrentClient(Transmission);
+	return PluginRegistry.registerTorrentClient(Transmission);
 };

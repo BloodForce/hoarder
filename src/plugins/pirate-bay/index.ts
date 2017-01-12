@@ -2,8 +2,11 @@ import {ITorrentProviderPlugin, IPluginConfig, IPluginRegistry} from "../../../t
 
 class PirateBay implements ITorrentProviderPlugin {
     constructor(config: IPluginConfig) {
-        console.log(config)
     }
+
+	pollRss() {
+		console.log('Pirate Bay is polling the RSS Feed')
+	}
 
     findTorrents() {
         console.log('Pirate Bay is looking for torrents');
@@ -11,5 +14,5 @@ class PirateBay implements ITorrentProviderPlugin {
 }
 
 export default (PluginRegistry: IPluginRegistry) => {
-    PluginRegistry.registerTorrentProvider(PirateBay);
+    return PluginRegistry.registerTorrentProvider(PirateBay);
 };

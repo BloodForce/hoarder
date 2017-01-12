@@ -11,5 +11,5 @@ class MovieMatchEngine implements IMatchEnginePlugin {
 }
 
 export default (PluginRegistry: IPluginRegistry) => {
-	PluginRegistry.registerMatchEngine(MovieMatchEngine);
+	return PluginRegistry.registerMatchEngine(MovieMatchEngine);
 };

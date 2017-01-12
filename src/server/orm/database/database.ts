@@ -1,15 +1,20 @@
+import {Repository} from 'typeorm';
+import {DatabaseContext} from './connection';
 import {MovieEntity} from '../entities/movie';
 import {PluginEntity} from '../entities/plugin';
 import {SeedBoxEntity} from '../entities/seed-box';
 import {TvShowEntity} from '../entities/tv-show';
-import {DatabaseContext} from './connection';
-import {Connection, Repository} from 'typeorm';
+import {ConfigEntity} from "../entities/config";
 
 export class Database {
 	private context: DatabaseContext;
 
-	connect(): Promise<Connection> {
-		return this.context.connect();
+	constructor(context: DatabaseContext) {
+		this.context = context;
+	}
+
+	async connect(): Promise<Database> {
+		return this.context.connect().then(() => this);
 	}
 
 	get seedbox(): Repository<SeedBoxEntity> {
@@ -26,5 +31,9 @@ export class Database {
 
 	get movies(): Repository<MovieEntity> {
 		return this.context.connection.getRepository<MovieEntity>(MovieEntity);
+	}
+
+	get config(): Repository<ConfigEntity> {
+		return this.context.connection.getRepository<ConfigEntity>(ConfigEntity);
 	}
 }

@@ -11,5 +11,5 @@ class Tmdb implements IMediaDatabasePlugin {
 }
 
 export default (PluginRegistry: IPluginRegistry) => {
-	PluginRegistry.registerMediaDatabase(Tmdb);
+	return PluginRegistry.registerMediaDatabase(Tmdb);
 };

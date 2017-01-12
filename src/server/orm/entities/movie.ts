@@ -1,16 +1,16 @@
-import { Column, PrimaryGeneratedColumn, Table } from 'typeorm';
+import {Column, PrimaryGeneratedColumn, Table} from 'typeorm';
 
 @Table()
 export class MovieEntity {
 	@PrimaryGeneratedColumn()
 	id: number;
 
-	@Column()
+	@Column('string')
 	title: string;
 
-	@Column()
+	@Column('string')
 	description: string;
 
-	@Column()
+	@Column('smallint')
 	year: number;
 }
