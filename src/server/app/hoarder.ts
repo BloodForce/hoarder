@@ -31,26 +31,45 @@ export class Hoarder {
 	}
 
 	async initSeedBoxes() {
+		// let plugins = this.database.plugins.create([
+		// 	{
+		// 		name: 'hoarder-plugin-hd-torrents',
+		// 		config: {}
+		// 	},
+		// 	{
+		// 		name: 'hoarder-plugin-pirate-bay',
+		// 		config: {}
+		// 	},
+		// 	{
+		// 		name: 'hoarder-plugin-tmdb',
+		// 		config: {}
+		// 	},
+		// 	{
+		// 		name: 'hoarder-plugin-transmission',
+		// 		config: {}
+		// 	},
+		// 	{
+		// 		name: 'hoarder-plugin-movie-match-engine',
+		// 		config: {}
+		// 	}]);
+        //
+		// let seedbox = this.database.seedbox.create({
+		// 	name: 'Seedboxes.cc',
+		// 	description: 'My Awesome seedbox',
+		// 	scheduleConfig: {
+		// 		rssPollInterval: 10000,
+		// 		torrentClientPollInterval: 1000
+		// 	},
+		// 	plugins
+		// });
+        //
+		// await this.database.seedbox.persist(seedbox).catch(e => console.log(e));
+
+
 		let seedBoxes = await this.database.seedbox
 			.createQueryBuilder('seedbox')
 			.innerJoinAndSelect('seedbox.plugins', 'plugins')
 			.getMany();
-
-
-
-
-		// let pluginA = this.database.plugins.create({
-		// 	name: 'hoarder-plugin-hd-torrents',
-		// 	config: {
-		// 		apiKey: 'foo'
-		// 	}
-		// });
-        //
-		// seedBoxes[0].plugins.push(pluginA);
-		// await this.database.seedbox.persist(seedBoxes);
-
-
-
 
 		this.seedBoxes = seedBoxes.map(seedBox => new SeedBox(new PackageManager(), new PluginRegistry()));
 		await this.seedBoxes.reduce((chain, seedBox, index) => chain.then(() => seedBox.init(seedBoxes[index])), Promise.resolve());
